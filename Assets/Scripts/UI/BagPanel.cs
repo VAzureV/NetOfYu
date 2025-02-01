@@ -25,6 +25,7 @@ public class BagPanel : BasePanel
     public override void OnEnable()
     {
         base.OnEnable();
+
     }
     public override void OnDestroy()
     {
@@ -38,5 +39,20 @@ public class BagPanel : BasePanel
         ActiveObj.SetActive(false);
     }
 
+    private void ReFreshBagPanel(ItemType itemType)
+    {
+        //刷新背包
+        switch (itemType)
+        {
+            case ItemType.Fish:
 
+                break;
+            case ItemType.Tool:
+                break;
+            case ItemType.Resourece:
+                break;
+            case ItemType.Garrbage:
+                break;
+        }
+    }
 }

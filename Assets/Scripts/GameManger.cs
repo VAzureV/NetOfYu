@@ -13,6 +13,7 @@ public class GameManger : MonoSingleton<GameManger>
 {
     public GameData CurGameData { get; set; }
     public Flowchart CurFlowchat { get; set; }
+    public BagConfig CurBagConfig { get; set; }
     void OnApplicationQuit()
     {
         Debug.Log("应用程序正在退出...");
@@ -29,7 +30,7 @@ public class GameManger : MonoSingleton<GameManger>
             InitData();
             Save();
         }
-        
+        CurBagConfig = ResourceManager.Instance.Load<BagConfig>("BagConfig");//读取配置数据
     }
     public void SetFlowchartObjInScene()
     {
@@ -83,11 +84,6 @@ public class GameManger : MonoSingleton<GameManger>
     }
     private void InitData()
     {
-        //CurGameData.FishNumDict[FishType.Pomfret] = 0;
-        //CurGameData.FishNumDict[FishType.Grouper] = 0;
-        //CurGameData.FishNumDict[FishType.Croaker] = 0;
-        //CurGameData.FishNumDict[FishType.Seaeel] = 0;
-        //CurGameData.FishNumDict[FishType.SeaRabbit] = 0;
         CurGameData.BgmVolume = 0.5f;
         CurGameData.SoundVolume = 0.5f;
         CurGameData.Gold = 0;

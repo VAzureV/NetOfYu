@@ -29,4 +29,5 @@ public class Item
     public string itemName;
     public string itemDescription;
     public string imagePath;
+    public int value;
 }
