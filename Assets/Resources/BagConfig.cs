@@ -19,7 +19,7 @@ public class BagConfig : ScriptableObject
     public List<Item> FishItems = new List<Item>();
     public List<Item> ToolItems = new List<Item>();
     public List<Item> ResoureceItems = new List<Item>();
-    public List<Item> GarrbageItems = new List<Item>();
+    public List<Item> GarbageItems = new List<Item>();
 }
 [System.Serializable]
 public class Item

@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using UnityEditor;
+using System.IO;
 public class GMCmd : EditorWindow
 {
     private int itemIndex = 0;
@@ -39,20 +40,12 @@ public class GMCmd : EditorWindow
             Close();
         }
     }
-    [MenuItem("GMCmd/读取配置数据")]
-    public static void LoadConfigData()
+    [MenuItem("GMCmd/清空数据")]
+    private static void ClearData()
     {
-        BagConfig bagConfig = ResourceManager.Instance.Load<BagConfig>("BagConfig");
-        foreach (var item in bagConfig.FishItems)
+        if (File.Exists(Application.persistentDataPath + "/GameData.data"))
         {
-            Debug.Log("FishItems: " + item.itemName);
+            File.Delete(Application.persistentDataPath + "/GameData.data");
         }
-        
     }
-    //[MenuItem("GMCmd/添加物品")]
-    //public static void AddItem(int index)
-    //{
-    //    GameManger.Instance.CurGameData.AddFishNum(index);
-    //    GameManger.Instance.Save();
-    //}
 }

@@ -15,6 +15,10 @@ public class GameData
     private List<int> toolNumList = new List<int>();
     private List<int> resourceNumList = new List<int>();
     private List<int> garbageNumList = new List<int>();
+    public const int FishNum = 10;
+    public const int ToolNum = 6;
+    public const int ResourceNum = 6;
+    public const int GarbageNum = 6;
     public float BgmVolume {  get; set; }
 	public float SoundVolume { get; set; }
 	public int Gold {  get; set; }
@@ -27,19 +31,19 @@ public class GameData
         Gold = 0;
         PolutionVal = 0;
         OpeningDialog = true;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < FishNum; i++)
         {
             fishNumList.Add(0);
         }
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < ToolNum; i++)
         {
             toolNumList.Add(0);
         }
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < ResourceNum; i++)
         {
             resourceNumList.Add(0);
         }
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < GarbageNum; i++)
         {
             garbageNumList.Add(0);
         }
@@ -120,5 +124,22 @@ public class GameData
             garbageNumList[index]--;
         }
     }
+    public int GetFishNum(int index)
+    {
+        return fishNumList[index];
+    }
+    public int GetToolNum(int index)
+    {
+        return toolNumList[index];
+    }
+    public int GetResourceNum(int index)
+    {
+        return resourceNumList[index];
+    }
+    public int GetGarbageNum(int index)
+    {
+        return garbageNumList[index];
+    }
+
 }
 
