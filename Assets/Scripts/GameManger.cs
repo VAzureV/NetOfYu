@@ -30,7 +30,7 @@ public class GameManger : MonoSingleton<GameManger>
             InitData();
             Save();
         }
-        CurBagConfig = ResourceManager.Instance.Load<BagConfig>("BagConfig");//读取配置数据
+        CurBagConfig = ResourceManager.Instance.Load<BagConfig>("Config/BagConfig");//读取配置数据
     }
     public void SetFlowchartObjInScene()
     {

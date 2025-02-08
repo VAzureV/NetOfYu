@@ -19,30 +19,35 @@ MonoBehaviour:
     itemDescription: 
     imagePath: "Image/Fish/\u77F3\u6591\u9C7C"
     value: 0
+    rarity: 1
   - itemType: 0
     itemID: 1
     itemName: "\u94F6\u9CB3\u9C7C"
     itemDescription: 
     imagePath: "Image/Fish/\u94F6\u9CB3\u9C7C"
     value: 0
+    rarity: 1
   - itemType: 0
     itemID: 2
     itemName: "\u5C0F\u9EC4\u9C7C"
     itemDescription: 
     imagePath: "Image/Fish/\u5C0F\u9EC4\u9C7C"
     value: 0
+    rarity: 1
   - itemType: 0
     itemID: 3
     itemName: "\u9CD7\u9C7C"
     itemDescription: 
     imagePath: "Image/Fish/\u9CD7\u9C7C"
     value: 0
+    rarity: 1
   - itemType: 0
     itemID: 4
     itemName: "\u6D77\u5154"
     itemDescription: 
     imagePath: "Image/Fish/\u6D77\u5154"
     value: 0
+    rarity: 2
   ToolItems:
   - itemType: 1
     itemID: 0
@@ -50,35 +55,41 @@ MonoBehaviour:
     itemDescription: "\u7B80\u964B\u7684\u5C0F\u8239"
     imagePath: "Assets/Resources/Image/Tool/\u6E14\u8239/\u4F4E\u7EA7\uFF081\u7EA7\uFF09\u6E14\u8239\uFF0C\u5546\u5E97\u4E2D.png"
     value: 0
+    rarity: 1
   - itemType: 1
     itemID: 1
     itemName: "\u4E8C\u7EA7\u8239"
     itemDescription: 
     imagePath: "Assets/Resources/Image/Tool/\u6E14\u8239/2\u7EA7\u6E14\u82391-\u5546\u5E97.png"
     value: 0
+    rarity: 2
   - itemType: 1
     itemID: 2
     itemName: "\u4E09\u7EA7\u8239"
     itemDescription: 
     imagePath: "Assets/Resources/Image/Tool/\u6E14\u8239/3\u7EA7\u6E14\u8239-\u5546\u5E97.png"
     value: 0
+    rarity: 3
   - itemType: 1
     itemID: 3
     itemName: "\u4E00\u7EA7\u7F51"
     itemDescription: 
     imagePath: "Assets/Resources/Image/Tool/\u6E14\u7F51/\u4F4E\u7EA7\u6E14\u7F51-\u5546\u5E97.png"
     value: 0
+    rarity: 1
   - itemType: 1
     itemID: 4
     itemName: "\u4E8C\u7EA7\u7F51"
     itemDescription: 
     imagePath: "Assets/Resources/Image/Tool/\u6E14\u7F51/\u4E2D\u7EA7\u6E14\u7F51-\u5546\u5E97.png"
     value: 0
+    rarity: 2
   - itemType: 1
     itemID: 5
     itemName: "\u4E09\u7EA7\u7F51"
     itemDescription: 
     imagePath: "Assets/Resources/Image/Tool/\u6E14\u7F51/\u9AD8\u7EA7\u6E14\u7F51\uFF0C\u5546\u5E97.png"
     value: 0
+    rarity: 3
   ResoureceItems: []
-  GarrbageItems: []
+  GarbageItems: []

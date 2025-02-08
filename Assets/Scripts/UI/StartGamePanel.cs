@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class StartGamePanel : BasePanel
 {
     private const string StartGamePanelName = "StartGamePanel";
-    private const string StartGamePanelPath = "Prefabs/StartGamePanel";
+    private const string StartGamePanelPath = "Prefabs/Panel/StartGamePanel";
 
     public StartGamePanel() : base(new UIType(StartGamePanelName, StartGamePanelPath)) {}
     public override void OnStart()

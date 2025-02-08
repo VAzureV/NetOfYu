@@ -13,6 +13,13 @@ public enum ItemType
     Resourece,
     Garrbage
 }
+public enum Rarity
+{
+    None,
+    Common,
+    Rare,
+    Special,
+}
 [CreateAssetMenu(fileName = "BagConfig", menuName = "Create BagConfig")]
 public class BagConfig : ScriptableObject 
 {
@@ -30,4 +37,5 @@ public class Item
     public string itemDescription;
     public string imagePath;
     public int value;
+    public Rarity rarity;
 }

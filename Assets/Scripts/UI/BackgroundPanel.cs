@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class BackgroundPanel : BasePanel
 {
     private const string BackgroundPanelName = "BackgroundPanel";
-    private const string BackgroundPanelPath = "Prefabs/BackgroundPanel";
+    private const string BackgroundPanelPath = "Prefabs/Panel/BackgroundPanel";
     private string bgImageName;
     private string backgroundImagePath;
     public BackgroundPanel(string bgImageName) : base(new UIType(BackgroundPanelName, BackgroundPanelPath))

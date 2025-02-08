@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class BagPanel : BasePanel 
 {
     private const string BagPanellName = "BagPanel";
-    private const string BagPanelPath = "Prefabs/BagPanel";
+    private const string BagPanelPath = "Prefabs/Panel/BagPanel";
     public BagPanel() : base(new UIType(BagPanellName, BagPanelPath)) { }
     public override void OnStart()
     {
