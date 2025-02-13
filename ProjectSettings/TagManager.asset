@@ -13,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Tips
   - 
   - 
   - 
@@ -54,4 +54,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2866707015
+    locked: 0
+  - name: Tips
+    uniqueID: 3452726553
     locked: 0

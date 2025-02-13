@@ -23,7 +23,7 @@ public class QTEParameterRange
     public Vector2 cursorSpeedRange = new Vector2(0.8f, 1.2f);
 
     [Header("成功区域参数")]
-    [Tooltip("区域宽度比例（0~1）")]
+    [Tooltip("区域宽度比例")]
     public Vector2 zoneSizeRange = new Vector2(0.3f, 0.5f);
 
     [Tooltip("区域起始位置范围（0~1）")]

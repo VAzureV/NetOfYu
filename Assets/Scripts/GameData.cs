@@ -141,5 +141,19 @@ public class GameData
         return garbageNumList[index];
     }
 
+    public int GetBoatLevel()
+    {
+        if (toolNumList[2] != 0) return 3;
+        if (toolNumList[1] != 0) return 2;
+        if (toolNumList[0] != 0) return 1;
+        return 0;
+    }
+    public int GetFishingRodLevel()
+    {
+        if (toolNumList[5] != 0) return 3;
+        if (toolNumList[4] != 0) return 2;
+        if (toolNumList[3] != 0) return 1;
+        return 0;
+    }
 }
 

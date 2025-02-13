@@ -15,9 +15,10 @@ MonoBehaviour:
   zoneType: 0
   qteParams:
     cursorSpeedRange: {x: 0.5, y: 0.8}
-    zoneSizeRange: {x: 0.4, y: 0.6}
-    zonePosRange: {x: 0.3, y: 0.7}
+    zoneSizeRange: {x: 2, y: 3}
+    zonePosRange: {x: 300, y: 500}
     FishNum: {x: 1, y: 4}
   MinZoneRange: {x: -14, y: -2}
   MaxZoneRange: {x: 14, y: 24}
+  FishTypes: {x: 0, y: 5}
   zoneColor: {r: 1, g: 1, b: 1, a: 1}

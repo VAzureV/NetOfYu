@@ -12,16 +12,27 @@ public class UIManger : Singleton<UIManger>
 {
 	private Dictionary<string, GameObject> panleObjDict;
 	private Stack<BasePanel> panelStack;
-	private GameObject canvasObj;
-
+	
+    private GameObject tipsPanelObj;
+    private GameObject tipsObj;
     public BasePanel CurPanel {  get; private set; }
+    public GameObject CanvasObj;
 
-	public void Init()
+    public void Init()
 	{
 		panleObjDict = new Dictionary<string, GameObject>();
 		panelStack = new Stack<BasePanel>();
+        CanvasObj = UIMethods.FindCanvas();
+        tipsPanelObj = GameObject.Instantiate<GameObject>(ResourceManager.Instance.Load<GameObject>("Prefabs/Panel/TipsPanel"), CanvasObj.transform);
+        tipsObj = UIMethods.FindObjectInChild(tipsPanelObj, "Tips");
         Debug.Log("____Init UIManger Success____");
 	}
+    public void UpdateCanvas()
+    {
+        CanvasObj = UIMethods.FindCanvas();
+        tipsPanelObj = GameObject.Instantiate<GameObject>(ResourceManager.Instance.Load<GameObject>("Prefabs/Panel/TipsPanel"), CanvasObj.transform);
+        tipsObj = UIMethods.FindObjectInChild(tipsPanelObj, "Tips");
+    }
     /// <summary>
     /// ag:startpanel将其UIType传入basepanel,basepanel和UIManager交互的时候将其UIType参数传入到此
     /// </summary>
@@ -79,9 +90,29 @@ public class UIManger : Singleton<UIManger>
         PopAll();
         foreach (var obj in panleObjDict.Values)
         {
-            GameObject.Destroy(obj);
+            if (obj != null) GameObject.Destroy(obj);
         }
         panleObjDict.Clear();
+    }
+    public void DestroyPanel(string panelName)
+    {
+        if (panleObjDict.ContainsKey(panelName))
+        {
+            GameObject.Destroy(panleObjDict[panelName]);
+            panleObjDict.Remove(panelName);
+        }
+    }
+    public void ShowTips(string tips)
+    {
+        tipsPanelObj.transform.SetAsLastSibling();
+        tipsObj.GetComponent<UnityEngine.UI.Text>().text = tips;
+        tipsObj.SetActive(true);
+        MonoManager.Instance.StartCoroutine(TipsHide());
+    }
+    private System.Collections.IEnumerator TipsHide()
+    {
+        yield return new WaitForSeconds(1f);
+        tipsObj.SetActive(false);
     }
     private GameObject GetSingleObject(UIType uiInfo)
     {
@@ -90,22 +121,22 @@ public class UIManger : Singleton<UIManger>
             return panleObjDict[uiInfo.Name];
         }
 
-        if (canvasObj == null)
+        if (CanvasObj == null)
         {
             Debug.Log("____load Canvas____");
-            canvasObj = UIMethods.FindCanvas();
+            CanvasObj = UIMethods.FindCanvas();
         }
 
         if (!panleObjDict.ContainsKey(uiInfo.Name))
         {
-            if (canvasObj == null)
+            if (CanvasObj == null)
             {
                 return null;
             }
             else
             {
                 //从本地加载一个物体并在场景中实例化
-                GameObject uiObj = GameObject.Instantiate<GameObject>(ResourceManager.Instance.Load<GameObject>(uiInfo.Path), canvasObj.transform);
+                GameObject uiObj = GameObject.Instantiate<GameObject>(ResourceManager.Instance.Load<GameObject>(uiInfo.Path), CanvasObj.transform);
                 return uiObj;
             }
         }

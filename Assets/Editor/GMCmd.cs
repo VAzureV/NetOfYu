@@ -48,4 +48,14 @@ public class GMCmd : EditorWindow
             File.Delete(Application.persistentDataPath + "/GameData.data");
         }
     }
+
+    [MenuItem("GMCmd/测试")]
+    private static void Test()
+    {
+        RectTransform successZone = GameObject.Find("HighlightZone").GetComponent<RectTransform>();
+        Debug.Log(successZone.anchoredPosition);
+        Debug.Log(successZone.sizeDelta);
+        Debug.Log(successZone.position);
+
+    }
 }

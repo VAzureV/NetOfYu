@@ -23,7 +23,6 @@ public class FishingSpotManger : Singleton<FishingSpotManger>
         shallowConfig = ResourceManager.Instance.Load<OceanZoneConfig>("Config/ShallowsConfig");
         midOceanConfig = ResourceManager.Instance.Load<OceanZoneConfig>("Config/MidOceanConfig");
         openSeaConfig = ResourceManager.Instance.Load<OceanZoneConfig>("Config/OpenSeaConfig");
-        GenerateFishingSpots();
     }
     public void GenerateFishingSpots()
     {
@@ -47,7 +46,7 @@ public class FishingSpotManger : Singleton<FishingSpotManger>
 
         
     }
-    void GenerateFishingSpots(OceanZoneConfig config)
+    private void GenerateFishingSpots(OceanZoneConfig config)
     {
         int numberOfSpots = Random.Range(3, 5);
         for (int i = 0; i < numberOfSpots; i++)
