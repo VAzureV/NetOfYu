@@ -49,13 +49,10 @@ public class GMCmd : EditorWindow
         }
     }
 
-    [MenuItem("GMCmd/测试")]
-    private static void Test()
+    [MenuItem("GMCmd/添加1000金币")]
+    private static void AddGold()
     {
-        RectTransform successZone = GameObject.Find("HighlightZone").GetComponent<RectTransform>();
-        Debug.Log(successZone.anchoredPosition);
-        Debug.Log(successZone.sizeDelta);
-        Debug.Log(successZone.position);
+        GameManger.Instance.CurGameData.Gold += 1000;
 
     }
 }

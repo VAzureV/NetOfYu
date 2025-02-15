@@ -18,10 +18,12 @@ public class CallUIMangerPushMethod : Command
         {
             // 调用方法
             UIManger.Instance.Push(new MainPanel());
+            // 弹出tips
+            UIManger.Instance.ShowTips("先去商店购买网和船", 3f);
         }
         else
         {
-            Debug.LogError("UIManger instance is null!");
+            LogUtility.LogError("UIManger instance is null!");
         }
 
         Continue();

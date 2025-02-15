@@ -17,7 +17,7 @@ public class ResourceManager : MonoSingleton<ResourceManager>
 {
     public void Init()
     {
-        Debug.Log("____Init ResourceManger Success____");
+        LogUtility.Log("____Init ResourceManger Success____");
     }
     /// <summary>
     /// <para>同步加载Resources文件夹中的资源。</para>
@@ -193,7 +193,7 @@ public class ResourceManager : MonoSingleton<ResourceManager>
             }
             else//如果字典已经存在该键，则跳过这个资源，并输出警告，不将它加入到字典中
             {
-                Debug.LogWarning(string.Format("Resources/{0}的子孙文件夹的资源{1}与已经添加到字典中的资源重名，因此无法将它添加到字典中，请确保加载的资源的名字是唯一的。", path, temp[i].name));
+                LogUtility.LogWarning(string.Format("Resources/{0}的子孙文件夹的资源{1}与已经添加到字典中的资源重名，因此无法将它添加到字典中，请确保加载的资源的名字是唯一的。", path, temp[i].name));
             }
         }
         return dic;
@@ -215,7 +215,7 @@ public class ResourceManager : MonoSingleton<ResourceManager>
             }
             else//如果字典已经存在该键，则跳过这个资源，并输出警告，不将它加入到字典中
             {
-                Debug.LogWarning(string.Format("Resources/{0}的子孙文件夹的资源{1}与已经添加到字典中的资源重名，因此无法将它添加到字典中，请确保加载的资源的名字是唯一的，并且传入参数的字典中不包含该名字的资源。", path, temp[i].name));
+                LogUtility.LogWarning(string.Format("Resources/{0}的子孙文件夹的资源{1}与已经添加到字典中的资源重名，因此无法将它添加到字典中，请确保加载的资源的名字是唯一的，并且传入参数的字典中不包含该名字的资源。", path, temp[i].name));
             }
         }
     }

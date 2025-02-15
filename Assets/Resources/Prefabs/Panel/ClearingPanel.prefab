@@ -1429,7 +1429,7 @@ GameObject:
   - component: {fileID: 5230170759715077293}
   - component: {fileID: 5267801805415186315}
   m_Layer: 5
-  m_Name: Content
+  m_Name: FishContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1710,7 +1710,7 @@ GameObject:
   - component: {fileID: 1794563376750370220}
   - component: {fileID: 1104748138460403676}
   m_Layer: 5
-  m_Name: Content
+  m_Name: ResContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

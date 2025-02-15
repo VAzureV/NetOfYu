@@ -27,7 +27,7 @@ public static class UIMethods
             }
         }
 
-        Debug.LogWarning($"没有在{Find_Panel.name}中找到{Find_Name}物体！");
+        LogUtility.LogWarning($"没有在{Find_Panel.name}中找到{Find_Name}物体！");
         return null;
     }
 
@@ -40,7 +40,7 @@ public static class UIMethods
         GameObject gameObject_canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
         if (gameObject_canvas == null)
         {
-            Debug.LogError("当前场景当中没有Canvas,请添加！");
+            LogUtility.LogError("当前场景当中没有Canvas,请添加！");
         }
 
         return gameObject_canvas;
@@ -59,7 +59,7 @@ public static class UIMethods
             return Get_Obj.GetComponent<T>();
         }
 
-        Debug.LogWarning($"无法在{Get_Obj}物体上获得目标组件！");
+        LogUtility.LogWarning($"无法在{Get_Obj}物体上获得目标组件！");
         return null;
     }
 
@@ -83,7 +83,7 @@ public static class UIMethods
             }
         }
 
-        Debug.LogWarning($"没有在{panel.name}中找到{ComponentName}物体！");
+        LogUtility.LogWarning($"没有在{panel.name}中找到{ComponentName}物体！");
         return null;
     }
 }

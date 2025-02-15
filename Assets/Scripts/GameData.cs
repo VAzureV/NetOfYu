@@ -15,7 +15,7 @@ public class GameData
     private List<int> toolNumList = new List<int>();
     private List<int> resourceNumList = new List<int>();
     private List<int> garbageNumList = new List<int>();
-    public const int FishNum = 10;
+    public const int FishNum = 16;
     public const int ToolNum = 6;
     public const int ResourceNum = 6;
     public const int GarbageNum = 6;
@@ -82,7 +82,7 @@ public class GameData
         {
             if (fishNumList[index] <= 0)
             {
-                Debug.LogError("鱼数量不足");
+                LogUtility.LogError("鱼数量不足");
                 return;
             }
             fishNumList[index]--;
@@ -94,7 +94,7 @@ public class GameData
         {
             if (toolNumList[index] <= 0)
             {
-                Debug.LogError("工具数量不足");
+                LogUtility.LogError("工具数量不足");
                 return;
             }
             toolNumList[index]--;
@@ -106,7 +106,7 @@ public class GameData
         {
             if (resourceNumList[index] <= 0)
             {
-                Debug.LogError("资源数量不足");
+                LogUtility.LogError("资源数量不足");
                 return;
             }
             resourceNumList[index]--;
@@ -118,7 +118,7 @@ public class GameData
         {
             if (garbageNumList[index] <= 0)
             {
-                Debug.LogError("垃圾数量不足");
+                LogUtility.LogError("垃圾数量不足");
                 return;
             }
             garbageNumList[index]--;
@@ -140,7 +140,25 @@ public class GameData
     {
         return garbageNumList[index];
     }
-
+    public void Clear()
+    {
+        for (int i = 0; i < FishNum; i++)
+        {
+            fishNumList[i] = 0;
+        }
+        for (int i = 0; i < ToolNum; i++)
+        {
+            toolNumList[i] = 0;
+        }
+        for (int i = 0; i < ResourceNum; i++)
+        {
+            resourceNumList[i] = 0;
+        }
+        for (int i = 0; i < GarbageNum; i++)
+        {
+            garbageNumList[i] = 0;
+        }
+    }
     public int GetBoatLevel()
     {
         if (toolNumList[2] != 0) return 3;

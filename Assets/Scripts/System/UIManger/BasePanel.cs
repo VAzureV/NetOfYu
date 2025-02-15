@@ -20,7 +20,7 @@ public class BasePanel
     }
 	public virtual void OnStart()
 	{
-        Debug.Log($"_____{UIType.Name}开始使用_____");
+        LogUtility.Log($"_____{UIType.Name}开始使用_____");
         if (ActiveObj.GetComponent<CanvasGroup>() == null)
         {
             ActiveObj.AddComponent<CanvasGroup>();

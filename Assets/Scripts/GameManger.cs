@@ -16,7 +16,7 @@ public class GameManger : MonoSingleton<GameManger>
     public BagConfig CurBagConfig { get; set; }
     void OnApplicationQuit()
     {
-        Debug.Log("应用程序正在退出...");
+        LogUtility.Log("应用程序正在退出...");
         // 在这里编写退出时需要执行的代码
         Save();
     }
@@ -31,9 +31,7 @@ public class GameManger : MonoSingleton<GameManger>
             Save();
         }
         CurBagConfig = ResourceManager.Instance.Load<BagConfig>("Config/BagConfig");//读取配置数据
-        // 初始一级船一级网
-        CurGameData.AddToolNum(0);
-        CurGameData.AddToolNum(3);
+        
     }
     public void SetFlowchartObjInScene()
     {
@@ -55,7 +53,7 @@ public class GameManger : MonoSingleton<GameManger>
         }
         catch (System.Exception e)
         {
-            Debug.Log(e.Message);
+            LogUtility.Log(e.Message);
         }
     }
     /// <summary>
@@ -74,7 +72,7 @@ public class GameManger : MonoSingleton<GameManger>
         catch (System.Exception e)
         {
 
-            Debug.Log(e.Message);
+            LogUtility.Log(e.Message);
         }
     }
     /// <summary>
@@ -89,8 +87,9 @@ public class GameManger : MonoSingleton<GameManger>
     {
         CurGameData.BgmVolume = 0.5f;
         CurGameData.SoundVolume = 0.5f;
-        CurGameData.Gold = 0;
+        CurGameData.Gold = 400;
         CurGameData.PolutionVal = 0;
         CurGameData.OpeningDialog = true;
+        CurGameData.Clear();
     }
 }

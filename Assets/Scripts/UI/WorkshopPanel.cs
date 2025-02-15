@@ -21,10 +21,13 @@ public class WorkshopPanel : BasePanel
     {
         base.OnStart();
 
+        //读取金币数据
+        UpdateGold();
+        //展示当前鱼价格
+        GameObject content = UIMethods.FindObjectInChild(ActiveObj, "FishShowContent");
+        ShowFishPrice(content);
         //鱼种类选择按钮点击
-        
         LoadImagesFromResources();
-        
         GameObject FishTypeObj = UIMethods.FindObjectInChild(ActiveObj, "FishType");
         Image FishTypeImg = UIMethods.AddOrGetComponent<Image>(FishTypeObj);
         if (images.Count > 0)
@@ -69,7 +72,7 @@ public class WorkshopPanel : BasePanel
         });
         UIMethods.AddOrGetComponent<Button>(RightArrow1Obj).onClick.AddListener(() =>
         {
-            //if (fishNum < GameManger.Instance.CurGameData.FishNumDict[(FishType)currentIndex]) fishNum++;
+            if (fishNum < GameManger.Instance.CurGameData.GetFishNum(currentIndex) ) fishNum++;
             FishNumTxt.text = fishNum.ToString();
         });
 
@@ -77,28 +80,18 @@ public class WorkshopPanel : BasePanel
         GameObject WorkObj = UIMethods.FindObjectInChild(ActiveObj, "WorkBtn");
         UIMethods.AddOrGetComponent<Button>(WorkObj).onClick.AddListener(() =>
         {
-            GameManger.Instance.CurGameData.PolutionVal++;
-            int val = 0;
-            switch (currentIndex)
+            if (fishNum != 0 && fishNum <= GameManger.Instance.CurGameData.GetFishNum(currentIndex))
             {
-                case 0:
-                    val = 10;
-                    break;
-                case 1:
-                    val = 15;
-                    break;
-                case 2:
-                    val = 20;
-                    break;
-                case 3:
-                    val = 25;
-                    break;
-                case 4:
-                    val = 30;
-                    break;
+                //GameManger.Instance.CurGameData.PolutionVal++;
+                int val = fishNum * GameManger.Instance.CurBagConfig.FishItems[currentIndex].value;
+                AudioManger.Instance.PlaySound(AudioType.GoldSound);
+                UIManger.Instance.ShowTips($"加工成功，获得{val}金币");
+                GameManger.Instance.CurGameData.DelFishNum(currentIndex, fishNum);
+                GameManger.Instance.CurGameData.Gold += val;
+                fishNum = 0;
+                FishNumTxt.text = "0";
+                UpdateGold();
             }
-            GameManger.Instance.CurGameData.Gold += val * fishNum;
-            FishNumTxt.text = "0";
         });
 
         //返回事件注册
@@ -125,20 +118,34 @@ public class WorkshopPanel : BasePanel
         ActiveObj.SetActive(true);
     }
 
-    void LoadImagesFromResources()
+    private void LoadImagesFromResources()
     {
         // 从 Resources/Images 文件夹加载图片
-        //images = Resources.LoadAll<Sprite>("Image/Fish");
-        images.Add(ResourceManager.Instance.Load<Sprite>("Image/Fish/小黄鱼"));
-        images.Add(ResourceManager.Instance.Load<Sprite>("Image/Fish/石斑鱼"));
-        images.Add(ResourceManager.Instance.Load<Sprite>("Image/Fish/银鲳鱼"));
-        images.Add(ResourceManager.Instance.Load<Sprite>("Image/Fish/鳗鱼"));
-        images.Add(ResourceManager.Instance.Load<Sprite>("Image/Fish/海兔"));
+        for (int i = 0; i < GameData.FishNum; i++)
+        {
+            images.Add(ResourceManager.Instance.Load<Sprite>(GameManger.Instance.CurBagConfig.FishItems[i].imagePath));
+        }
         if (images.Count == 0)
         {
-            Debug.LogError("No images found in Resources/Images!");
+            LogUtility.LogError("No images found in Resources/Images!");
+        }
+    }
+    private void UpdateGold()
+    {
+        GameObject GoldNumObj = UIMethods.FindObjectInChild(ActiveObj, "GoldNum");
+        UIMethods.AddOrGetComponent<Text>(GoldNumObj).text = GameManger.Instance.CurGameData.Gold.ToString();
+    }
+    private void ShowFishPrice(GameObject content)
+    {
+        GameObject showItemPrefab = ResourceManager.Instance.Load<GameObject>("Prefabs/Inventory/ShowItem");
+        for (int i = 0; i < GameData.FishNum; i++)
+        {
+            GameObject newItem = GameObject.Instantiate(showItemPrefab, content.transform);
+            GameObject fishImgObj = newItem.transform.GetChild(0).gameObject;
+            GameObject fishPriceObj = newItem.transform.GetChild(1).gameObject;
+            fishPriceObj.transform.GetChild(0).GetComponent<Text>().text = GameManger.Instance.CurBagConfig.FishItems[i].itemName + "$" + GameManger.Instance.CurBagConfig.FishItems[i].value;
+            fishImgObj.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.FishItems[i].imagePath);
         }
     }
 
-    
 }
