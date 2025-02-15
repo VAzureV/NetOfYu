@@ -22,42 +22,51 @@ public class BoatController : MonoBehaviour
     private float currentSpeed = 0f; // 当前速度
     private float turnInput = 0f;    // 缓存转向输入
 
-    private Camera came;
-
     private Animator animator;
     private bool isMove = false;
-    private bool isCatch = false;
+    public bool canMove = true;
 
-    public GameObject projectilePrefab; // 子弹预制件
-    public Transform spawnPoint;        // 发射位置
-    public float fireOffset = 1f;
-    public Slider charceBar;        //蓄力条UI
-    public float maxChargeTime = 2f;    // 最大蓄力时间
-    public float minForce = 1f;          // 最小发射力度
-    public float maxForce = 10f;        // 最大发射力度
-
-    private bool isCharging = false;    // 是否正在蓄力
-    private float chargeStartTime;      // 蓄力开始时间
-
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0; // 禁用重力
-        
+        canMove = true;
         animator = GetComponentInChildren<Animator>();
-        came = Camera.main; 
+    }
+    void Start()
+    {
+        if (GameManger.Instance.CurGameData.GetBoatLevel() == 3)
+        {
+            maxSpeed = 6f;
+            acceleration = 3f;
+            rotationSpeed = 200f;
+            drag = 0.97f;
+        }
+        else if (GameManger.Instance.CurGameData.GetBoatLevel() == 2)
+        {
+            maxSpeed = 4f;
+            acceleration = 2f;
+            rotationSpeed = 100f;
+            drag = 0.96f;
+        }
+        else
+        {
+            maxSpeed = 2f;
+            acceleration = 1f;   
+            rotationSpeed = 50f;
+            drag = 0.95f;
+        }
     }
 
     void Update()
     {
-        if (!isCatch) Move();
-        CatchFish();
+        if (canMove) Move();
         
     }
 
     void FixedUpdate()
     {
-        if (!isCatch) FixedMove();
+        if (canMove) FixedMove();
     }
 
     void Move()
@@ -99,80 +108,11 @@ public class BoatController : MonoBehaviour
         // 更新船的位置
         rb.position = position;
     }
-
-    void CatchFish()
+    public void StopBoat()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (isCatch)
-            {
-                isCatch = false;
-                StartCoroutine(ChangeCameraSize(came.orthographicSize, 5f, 1));
-            }
-            else
-            {
-                rb.velocity = Vector2.zero;
-                rb.angularVelocity = 0;
-                isMove = false;
-                isCatch = true;
-                StartCoroutine(ChangeCameraSize(came.orthographicSize, 5.5f, 1));
-            }
-            
-        }
-        if (isCatch && Input.GetMouseButtonDown(0))
-        {
-            isCharging = true;
-            chargeStartTime = Time.time;
-       
-        }
-        if (Input.GetMouseButtonUp(0) && isCharging)
-        {
-            isCharging = false;
-
-            // 计算蓄力时间和力度
-            float chargeDuration = Mathf.Min(Time.time - chargeStartTime, maxChargeTime); // 蓄力时间不能超过最大值
-            float force = Mathf.Lerp(minForce, maxForce, chargeDuration / maxChargeTime);       // 计算发射力度
-
-            Shoot(force);
-        }
-
+        currentSpeed = 0;
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0;
     }
-    private void Shoot(float force)
-    {
-        // 获取鼠标位置
-        Vector3 mouseWorldPosition = came.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPosition.z = 0; // 确保在 2D 平面上
 
-        // 计算发射方向
-        Vector2 direction = (mouseWorldPosition - spawnPoint.position).normalized;
-
-        // 动态计算发射位置
-        Vector3 firePosition = spawnPoint.position + (Vector3)direction * fireOffset;
-
-        // 创建子弹并设置初始位置
-        GameObject projectile = Instantiate(projectilePrefab, firePosition, Quaternion.identity);
-
-        // 给子弹添加力
-        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.AddForce(direction * force, ForceMode2D.Impulse); // 使用蓄力值作为力度
-        }
-
-        // 可选：销毁子弹以防止性能问题
-        Destroy(projectile, 5f);
-    }
-    private IEnumerator ChangeCameraSize(float startSize, float endSize, float duration)
-    {
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration; // 计算插值比例
-            came.orthographicSize = Mathf.Lerp(startSize, endSize, t); // 插值计算
-            yield return null; // 等待下一帧
-        }
-
-        came.orthographicSize = endSize; // 确保最终值是目标值
-    }
 }

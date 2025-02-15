@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class FishingSpot : MonoBehaviour 
 {
     private GameObject tipsE;
+    private GameObject boat;
 
     public float blinkSpeed = 2f; // 闪烁速度
     private float alphaValue = 1f; // 当前透明度
@@ -45,6 +46,7 @@ public class FishingSpot : MonoBehaviour
     {
         if (other.CompareTag("Boat"))
         {
+            boat = other.gameObject;
             tipsE.SetActive(true);
             isEnter = true;
         }
@@ -56,6 +58,8 @@ public class FishingSpot : MonoBehaviour
             Blink();
             if (Input.GetKeyDown(KeyCode.E))
             {
+                boat.GetComponent<BoatController>().StopBoat();
+                boat.GetComponent<BoatController>().canMove = false;
                 if (!isInit)
                 {
                     OceanZoneConfig oceanZoneConfig = null;

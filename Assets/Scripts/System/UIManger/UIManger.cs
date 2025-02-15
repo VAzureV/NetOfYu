@@ -25,7 +25,7 @@ public class UIManger : Singleton<UIManger>
         CanvasObj = UIMethods.FindCanvas();
         tipsPanelObj = GameObject.Instantiate<GameObject>(ResourceManager.Instance.Load<GameObject>("Prefabs/Panel/TipsPanel"), CanvasObj.transform);
         tipsObj = UIMethods.FindObjectInChild(tipsPanelObj, "Tips");
-        Debug.Log("____Init UIManger Success____");
+        LogUtility.Log("____Init UIManger Success____");
 	}
     public void UpdateCanvas()
     {
@@ -102,16 +102,16 @@ public class UIManger : Singleton<UIManger>
             panleObjDict.Remove(panelName);
         }
     }
-    public void ShowTips(string tips)
+    public void ShowTips(string tips, float time = 1f)
     {
         tipsPanelObj.transform.SetAsLastSibling();
         tipsObj.GetComponent<UnityEngine.UI.Text>().text = tips;
         tipsObj.SetActive(true);
-        MonoManager.Instance.StartCoroutine(TipsHide());
+        MonoManager.Instance.StartCoroutine(TipsHide(time));
     }
-    private System.Collections.IEnumerator TipsHide()
+    private System.Collections.IEnumerator TipsHide(float time)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(time);
         tipsObj.SetActive(false);
     }
     private GameObject GetSingleObject(UIType uiInfo)
@@ -123,7 +123,7 @@ public class UIManger : Singleton<UIManger>
 
         if (CanvasObj == null)
         {
-            Debug.Log("____load Canvas____");
+            LogUtility.Log("____load Canvas____");
             CanvasObj = UIMethods.FindCanvas();
         }
 

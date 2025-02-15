@@ -83,7 +83,7 @@ public class BagPanel : BasePanel
 
     private void ReFreshBagPanel(ItemType itemType)
     {
-        GameObject inventory = UIMethods.FindObjectInChild(ActiveObj, "Inventory");
+        GameObject inventory = UIMethods.FindObjectInChild(ActiveObj, "InventoryContent");
         GameObject itemPrefab = Resources.Load<GameObject>("Prefabs/Inventory/Item");
         //刷新背包
         for (int i = 0; i < inventory.transform.childCount; i++)
@@ -103,9 +103,10 @@ public class BagPanel : BasePanel
                     GameObject newItem = GameObject.Instantiate(itemPrefab, inventory.transform);
                     GameObject numObj = newItem.transform.GetChild(0).gameObject;
                     GameObject nameObj = newItem.transform.GetChild(1).gameObject;
+                    GameObject fishImgObj = newItem.transform.GetChild(2).gameObject;
                     numObj.GetComponent<Text>().text = GameManger.Instance.CurGameData.GetFishNum(i).ToString();
                     nameObj.GetComponent<Text>().text = GameManger.Instance.CurBagConfig.FishItems[i].itemName;
-                    newItem.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.FishItems[i].imagePath);
+                    fishImgObj.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.FishItems[i].imagePath);
                 }
                 break;
             case ItemType.Tool:
@@ -118,9 +119,10 @@ public class BagPanel : BasePanel
                     GameObject newItem = GameObject.Instantiate(itemPrefab, inventory.transform);
                     GameObject numObj = newItem.transform.GetChild(0).gameObject;
                     GameObject nameObj = newItem.transform.GetChild(1).gameObject;
+                    GameObject toolImgObj = newItem.transform.GetChild(2).gameObject;
                     numObj.GetComponent<Text>().text = GameManger.Instance.CurGameData.GetToolNum(i).ToString();
                     nameObj.GetComponent<Text>().text = GameManger.Instance.CurBagConfig.ToolItems[i].itemName;
-                    newItem.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.ToolItems[i].imagePath);
+                    toolImgObj.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.ToolItems[i].imagePath);
                 }
                 break;
             case ItemType.Resourece:
@@ -133,9 +135,10 @@ public class BagPanel : BasePanel
                     GameObject newItem = GameObject.Instantiate(itemPrefab, inventory.transform);
                     GameObject numObj = newItem.transform.GetChild(0).gameObject;
                     GameObject nameObj = newItem.transform.GetChild(1).gameObject;
+                    GameObject resImgObj = newItem.transform.GetChild(2).gameObject;
                     numObj.GetComponent<Text>().text = GameManger.Instance.CurGameData.GetResourceNum(i).ToString();
                     nameObj.GetComponent<Text>().text = GameManger.Instance.CurBagConfig.ResoureceItems[i].itemName;
-                    newItem.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.ResoureceItems[i].imagePath);
+                    resImgObj.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.ResoureceItems[i].imagePath);
                 }
                 break;
             case ItemType.Garrbage:
@@ -148,9 +151,10 @@ public class BagPanel : BasePanel
                     GameObject newItem = GameObject.Instantiate(itemPrefab, inventory.transform);
                     GameObject numObj = newItem.transform.GetChild(0).gameObject;
                     GameObject nameObj = newItem.transform.GetChild(1).gameObject;
+                    GameObject garbageImgObj = newItem.transform.GetChild(2).gameObject;
                     numObj.GetComponent<Text>().text = GameManger.Instance.CurGameData.GetGarbageNum(i).ToString();
                     nameObj.GetComponent<Text>().text = GameManger.Instance.CurBagConfig.GarbageItems[i].itemName;
-                    newItem.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.GarbageItems[i].imagePath);
+                    garbageImgObj.GetComponent<Image>().sprite = Resources.Load<Sprite>(GameManger.Instance.CurBagConfig.GarbageItems[i].imagePath);
                 }
                 break;
         }

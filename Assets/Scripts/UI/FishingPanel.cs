@@ -25,12 +25,13 @@ public class FishingPanel : BasePanel
     private GameObject highlightZone;
     private Slider ropeSlider;
     private Coroutine currentCoroutine;
+    private GameObject fishingRoot;
 
     private QTEGameState qteState = QTEGameState.Idle;
     private float cursorPosition = 0f;       // 游标当前位置
     private bool isMovingRight = true;       // 游标移动方向
-    private int successCount = 0;
-    private int curSuccessCount = 0;
+    private int successCount = 0;            // 每条鱼需要成功次数
+    private int curSuccessCount = 0;         // 当前成功次数
     private string OceanName;
     public FishingPanel(FishingSpot fishingSpot) : base(new UIType(FishingPanelName, FishingPanelPath))
     {
@@ -68,6 +69,7 @@ public class FishingPanel : BasePanel
         fishingbar = UIMethods.FindObjectInChild(ActiveObj, "Fishingbar");
         highlightZone = UIMethods.FindObjectInChild(ActiveObj, "HighlightZone");
         ropeSlider = UIMethods.FindObjectInChild(ActiveObj, "RopeSlider").GetComponent<Slider>();
+        fishingRoot = GameObject.Find("FishingRoot");
         qteState = QTEGameState.Running;
         MonoManager.Instance.AddUpdateListener(UpdateQTEGame);
         MonoManager.Instance.AddUpdateListener(InputCheck);
@@ -77,6 +79,7 @@ public class FishingPanel : BasePanel
         GameObject exitBtnObj = UIMethods.FindObjectInChild(ActiveObj, "ExitBtn");
         UIMethods.AddOrGetComponent<Button>(exitBtnObj).onClick.AddListener(() =>
         {
+            GameObject.FindGameObjectWithTag("Boat").GetComponent<BoatController>().canMove = true;
             UIManger.Instance.Pop();
         });
         // 钓鱼按钮
@@ -85,6 +88,7 @@ public class FishingPanel : BasePanel
             qteState = QTEGameState.Idle;
             if (highlightZone.GetComponent<HighlightZoneTriger>().IsSuccessful() && curFishingSpot.FishNum != 0)
             {
+                AudioManger.Instance.PlaySound(AudioType.NetSound);
                 curSuccessCount--;
                 SetValueSmoothly((float)curSuccessCount / successCount, 0.5f);
                 if (curSuccessCount == 0)
@@ -101,10 +105,12 @@ public class FishingPanel : BasePanel
                 if (curFishingSpot.FishNum == 0)
                 {
                     UIManger.Instance.ShowTips("鱼已经被捕完了");
+                    qteState = QTEGameState.Idle;
                 }
                 else
                 {
                     OnQTEFailed();
+                    qteState = QTEGameState.Running;
                     curSuccessCount = successCount;
                 }
                 
@@ -163,7 +169,7 @@ public class FishingPanel : BasePanel
     {
         if (fishingbar == null)
         {
-            Debug.LogError("fishingbar is null");
+            LogUtility.LogError("fishingbar is null");
         }
         fishingbar.GetComponent<Scrollbar>().value = position;
     }
@@ -187,10 +193,12 @@ public class FishingPanel : BasePanel
     }
     private void OnQTESuccess()
     {
+        AudioManger.Instance.PlaySound(AudioType.FinishedFishingSound);
         // 显示成功 UI
         UIManger.Instance.ShowTips("成功捕获 " + GameManger.Instance.CurBagConfig.FishItems[curFishingSpot.FishTypes[curFishingSpot.FishNum]].itemName);
         // 对应数据处理
-        //GameManger.Instance.CurGameData.AddFishNum(curFishingSpot.FishTypes[curFishingSpot.FishNum]);
+        fishingRoot.GetComponent<FishingRoot>().AddFishNum(curFishingSpot.FishTypes[curFishingSpot.FishNum]);
+        GameManger.Instance.CurGameData.AddFishNum(curFishingSpot.FishTypes[curFishingSpot.FishNum]);
     }
 
     private void OnQTEFailed()
@@ -204,7 +212,7 @@ public class FishingPanel : BasePanel
     {
         if (ropeSlider == null)
         {
-            Debug.LogError("Slider未赋值！");
+            LogUtility.LogError("Slider未赋值！");
             return;
         }
 

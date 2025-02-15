@@ -34,9 +34,6 @@ public class StartGamePanel : BasePanel
             LoadingPanel loadingPanel = new LoadingPanel();
             UIManger.Instance.Push(loadingPanel);
             LoadSceneManager.Instance.LoadSceneAsync(1, loadingPanel.UpdateLoadingBar, null, true);
-            //UIManger.Instance.DestroyAll();
-
-
         });
         // 将点击事件添加到 EventTrigger
         eventTrigger.triggers.Add(clickEntry);
@@ -46,6 +43,12 @@ public class StartGamePanel : BasePanel
         UIMethods.AddOrGetComponent<Button>(volumeBtnObj).onClick.AddListener(() =>
         {
             UIManger.Instance.Push(new VolumePanel());
+        });
+
+        GameObject resetBtnObj = UIMethods.FindObjectInChild(ActiveObj, "ResetBtn");
+        UIMethods.AddOrGetComponent<Button>(resetBtnObj).onClick.AddListener(() =>
+        {
+            GameManger.Instance.ResetData();
         });
 
     }

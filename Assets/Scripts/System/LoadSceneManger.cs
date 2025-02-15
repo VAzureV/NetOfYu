@@ -114,7 +114,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
             }
             else
             {
-                Debug.LogWarning($"加载场景失败！要加载的场景的索引是{buildIndex},超过了当前Build Settings窗口中的最大索引。");
+                LogUtility.LogWarning($"加载场景失败！要加载的场景的索引是{buildIndex},超过了当前Build Settings窗口中的最大索引。");
             }
         }
     }
@@ -140,7 +140,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
             }
             else
             {
-                Debug.LogWarning($"加载场景失败！要加载的场景的索引是{buildIndex},没有索引为负数的场景。");
+                LogUtility.LogWarning($"加载场景失败！要加载的场景的索引是{buildIndex},没有索引为负数的场景。");
             }
         }
     }
@@ -346,7 +346,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
             }
             else
             {
-                Debug.LogWarning($"加载场景失败！要加载的场景的索引是{buildIndex}，超过了当前Build Settings窗口中的最大索引。");
+                LogUtility.LogWarning($"加载场景失败！要加载的场景的索引是{buildIndex}，超过了当前Build Settings窗口中的最大索引。");
             }
         }
     }
@@ -375,7 +375,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
             }
             else
             {
-                Debug.LogWarning($"加载场景失败！要加载的场景的索引是{buildIndex}，没有索引为负数的场景。");
+                LogUtility.LogWarning($"加载场景失败！要加载的场景的索引是{buildIndex}，没有索引为负数的场景。");
             }
         }
     }
@@ -399,7 +399,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
 
         if (asyncOperation == null)
         {
-            Debug.LogWarning("要销毁的场景不合法，销毁无效！");
+            LogUtility.LogWarning("要销毁的场景不合法，销毁无效！");
             yield break;
         }
 
@@ -431,7 +431,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
 
         if (asyncOperation == null)
         {
-            Debug.LogWarning("要销毁的场景不合法，销毁无效！");
+            LogUtility.LogWarning("要销毁的场景不合法，销毁无效！");
             yield break;
         }
 
@@ -462,7 +462,7 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
 
         if (asyncOperation == null)
         {
-            Debug.LogWarning("要销毁的场景不合法，销毁无效！");
+            LogUtility.LogWarning("要销毁的场景不合法，销毁无效！");
             yield break;
         }
 
@@ -482,13 +482,13 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
     {
         if (buildIndex < 0)
         {
-            Debug.LogWarning($"要加载的场景的索引不合法！该索引是{buildIndex}，不能为负数。");
+            LogUtility.LogWarning($"要加载的场景的索引不合法！该索引是{buildIndex}，不能为负数。");
             return false;
         }
 
         if (buildIndex > SceneManager.sceneCountInBuildSettings - 1)
         {
-            Debug.LogWarning($"要加载的场景的索引不合法！该索引越界，越界的索引是{buildIndex},但是场景最大的索引是{SceneManager.sceneCountInBuildSettings - 1}。");
+            LogUtility.LogWarning($"要加载的场景的索引不合法！该索引越界，越界的索引是{buildIndex},但是场景最大的索引是{SceneManager.sceneCountInBuildSettings - 1}。");
             return false;
         }
 
@@ -500,10 +500,10 @@ public class LoadSceneManager : Singleton<LoadSceneManager>
     /// </summary>
     public void PrintLoadedScenesInfo()
     {
-        Debug.Log($"当前已加载的场景有{SceneManager.sceneCount}个。");
+        LogUtility.Log($"当前已加载的场景有{SceneManager.sceneCount}个。");
 
         for (int i = 0; i < SceneManager.sceneCount; i++)
-            Debug.Log($"索引为{i}的场景的名字是：{SceneManager.GetSceneAt(i).name}");
+            LogUtility.Log($"索引为{i}的场景的名字是：{SceneManager.GetSceneAt(i).name}");
     }
 
     /// <summary>

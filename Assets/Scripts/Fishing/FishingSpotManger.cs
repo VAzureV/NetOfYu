@@ -60,7 +60,7 @@ public class FishingSpotManger : Singleton<FishingSpotManger>
             // 实例化钓鱼点
             GameObject spot = GameObject.Instantiate(fishingSpotPrefab, randomPosition, Quaternion.identity);
             spot.GetComponent<FishingSpot>().BelongOcean = config.zoneType;
-            Debug.Log("生成了一个钓鱼点" + spot.GetComponent<FishingSpot>().BelongOcean.ToString());
+            LogUtility.Log("生成了一个钓鱼点" + spot.GetComponent<FishingSpot>().BelongOcean.ToString());
             // 随机分配鱼类
         }
 

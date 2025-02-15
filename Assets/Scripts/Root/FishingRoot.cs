@@ -5,14 +5,15 @@
 *****************************************************/
 
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class FishingRoot : MonoBehaviour 
 {
-    private List<int> fishNumList = new List<int>(FishNum);
-    private List<int> garbageNumList = new List<int>(GarbageNum);
-    private const int FishNum = 10;
-    private const int GarbageNum = 6;
+    public const int FishNum = 16;
+    public const int GarbageNum = 6;
+    private int[] fishNumList = new int[FishNum];
+    private int[] garbageNumList = new int[GarbageNum];
     private GameObject navPanel;
     private void Awake()
     {
@@ -21,23 +22,61 @@ public class FishingRoot : MonoBehaviour
     }
     private void Init()
     {
-        ResourceManager.Instance.Init();
-        UIManger.Instance.Init();
-        GameManger.Instance.Init();
-        FishingSpotManger.Instance.Init();
-        //初始化鱼数量
+        //播放出海BGM
+        AudioManger.Instance.PlayBGM(AudioType.FishingBgm);
+        //更新UI管理器
+        UIManger.Instance.DestroyAll();
+        UIManger.Instance.UpdateCanvas();
+
+        //载入航行UI
+        GameObject navPanelPrefab = ResourceManager.Instance.Load<GameObject>("Prefabs/Panel/NavigatePanel");
+        navPanel = GameObject.Instantiate(navPanelPrefab, UIManger.Instance.CanvasObj.transform);
+
+        //在地图上生成钓鱼点
+        FishingSpotManger.Instance.GenerateFishingSpots();
+
+        //生成垃圾
+        GenerateGarbage();
+
+        //初始化当前所捕鱼数量
         for (int i = 0; i < FishNum; i++)
         {
             fishNumList[i] = 0;
         }
-        //初始化垃圾数量
+        //初始化当前所获得垃圾数量
         for (int i = 0; i < GarbageNum; i++)
         {
             garbageNumList[i] = 0;
         }
-        //载入航行UI
-        GameObject navPanelPrefab = ResourceManager.Instance.Load<GameObject>("Prefabs/Panel/NavigationPanel");
-        navPanel = GameObject.Instantiate(navPanelPrefab, UIManger.Instance.CanvasObj.transform);
+        
+    }
+    private void GenerateGarbage()
+    {
+        //生成垃圾
+        GameObject garbagePrefab = ResourceManager.Instance.Load<GameObject>("Prefabs/Fishing/Garbage");
+        int numberOfGarbage = Random.Range(15, 20);
+        for (int i = 0; i < numberOfGarbage; i++)
+        {
+            // 全图随机生成垃圾位置
+            Vector3 randomPosition = new Vector3(
+            Random.Range(-14, 14),
+            Random.Range(-2, 90),
+                0
+            );
+            // 实例化垃圾
+            GameObject garbage = GameObject.Instantiate(garbagePrefab, randomPosition, Quaternion.identity);
+            // 设置垃圾ID
+            garbage.GetComponent<GarbageTriger>().garbageID = Random.Range(0, GarbageNum);
+            garbage.GetComponent<GarbageTriger>().fishingRoot = this;
+        }
+    }
+    public int GetFishNum(int fishID)
+    {
+        return fishNumList[fishID];
+    }
+    public int GetGarbageNum(int garbageID)
+    {
+        return garbageNumList[garbageID];
     }
     public void AddFishNum(int fishID)
     {

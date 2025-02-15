@@ -9,7 +9,7 @@ public class EventManger : Singleton<EventManger>
     public void Init()
     {
         m_EventTable = new Dictionary<EventDefine, Delegate>();
-        Debug.Log("____Init EventManger Success____");
+        LogUtility.Log("____Init EventManger Success____");
     }
     private void OnListenerAdding(EventDefine eventType, Delegate callBack)
     {

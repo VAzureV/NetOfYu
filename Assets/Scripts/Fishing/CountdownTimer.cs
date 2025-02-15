@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class CountdownTimer : MonoBehaviour 
 {
-    public float totalTime = 60.0f;  // 总计时长（秒）
+    private float totalTime = 60.0f;  // 总计时长（秒）
     private Text countdownText;       // 倒计时文本组件
     private Button endBtn;
     private float currentTime;      // 当前剩余时间
@@ -17,6 +17,18 @@ public class CountdownTimer : MonoBehaviour
 
     void Start()
     {
+        if (GameManger.Instance.CurGameData.GetBoatLevel() == 3)
+        {
+            totalTime = 120.0f;
+        }
+        else if (GameManger.Instance.CurGameData.GetBoatLevel() == 2)
+        {
+            totalTime = 90.0f;
+        }
+        else
+        {
+            totalTime = 60.0f;
+        }
         currentTime = totalTime;
         countdownText = this.gameObject.transform.Find("Time").GetComponent<Text>();
         endBtn = this.gameObject.transform.Find("End").GetComponent<Button>();
@@ -35,7 +47,7 @@ public class CountdownTimer : MonoBehaviour
             if (currentTime <= 0)
             {
                 currentTime = 0;
-                OnTimerEnd();
+                EndToClearing();
             }
         }
     }
@@ -51,21 +63,22 @@ public class CountdownTimer : MonoBehaviour
     // 倒计时结束逻辑
     void OnTimerEnd()
     {
-        Time.timeScale = 0;           // 暂停游戏（可选）
+        //Time.timeScale = 0;           // 暂停游戏（可选）
         //endPanel.SetActive(true);     // 显示结束面板
-        Debug.Log("倒计时结束！");
+        //Debug.Log("倒计时结束！");
     }
     public void EndToClearing()
     {
+        OnTimerEnd();
         // 打开结算面板
-
+        UIManger.Instance.Push(new ClearingPanel());
         // 关闭航行面板
         this.gameObject.SetActive(false);
     }
     // 提供给"确定"按钮调用的方法（需在按钮事件中绑定）
     public void OnConfirmButtonClick()
     {
-        Time.timeScale = 1;           // 恢复游戏时间（如果暂停了）
+        //Time.timeScale = 1;           // 恢复游戏时间（如果暂停了）
         //endPanel.SetActive(false);    // 关闭面板
         // 这里可以添加其他逻辑（如重新加载场景）
     }

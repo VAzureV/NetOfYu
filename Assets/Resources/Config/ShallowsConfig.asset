@@ -17,7 +17,7 @@ MonoBehaviour:
     cursorSpeedRange: {x: 0.5, y: 0.8}
     zoneSizeRange: {x: 2, y: 3}
     zonePosRange: {x: 300, y: 500}
-    FishNum: {x: 1, y: 4}
+    FishNum: {x: 2, y: 4}
   MinZoneRange: {x: -14, y: -2}
   MaxZoneRange: {x: 14, y: 24}
   FishTypes: {x: 0, y: 5}

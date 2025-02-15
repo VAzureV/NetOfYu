@@ -11,9 +11,14 @@ using UnityEngine;
 public enum AudioType
 {
     Bgm1,
+    FishingBgm,
 
     buttonSound,
     startGameSound,
+    GoldSound,
+    FinishedFishingSound,
+    NetSound,
+    GarbageSound,
 }
 public class AudioManger : MonoSingleton<AudioManger> 
 {
@@ -43,7 +48,7 @@ public class AudioManger : MonoSingleton<AudioManger>
 
         SoundVolume = 1;
 
-        Debug.Log("_____Init AudioManger Success___");
+        LogUtility.Log("_____Init AudioManger Success___");
     }
     GameObject CreateController(string name, Transform parent)
     {
@@ -55,10 +60,20 @@ public class AudioManger : MonoSingleton<AudioManger>
     {
         AudioClip bgm1AC = ResourceManager.Instance.Load<AudioClip>("Audio/BGM/bgm-1");
         audioDict.Add(AudioType.Bgm1, bgm1AC);
+        AudioClip fishingBgmAC = ResourceManager.Instance.Load<AudioClip>("Audio/BGM/出海");
+        audioDict.Add(AudioType.FishingBgm, fishingBgmAC);
         AudioClip btnSoundAC = ResourceManager.Instance.Load<AudioClip>("Audio/Sound/ButtonSound");
         audioDict.Add(AudioType.buttonSound, btnSoundAC);
         AudioClip startGameSoundAC = ResourceManager.Instance.Load<AudioClip>("Audio/Sound/StartGameSound");
         audioDict.Add(AudioType.startGameSound, startGameSoundAC);
+        AudioClip goldSoundAC = ResourceManager.Instance.Load<AudioClip>("Audio/Sound/GoldSound");
+        audioDict.Add(AudioType.GoldSound, goldSoundAC);
+        AudioClip finishedFishingSoundAC = ResourceManager.Instance.Load<AudioClip>("Audio/Sound/FinishedFishingSound");
+        audioDict.Add(AudioType.FinishedFishingSound, finishedFishingSoundAC);
+        AudioClip netSoundAC = ResourceManager.Instance.Load<AudioClip>("Audio/Sound/NetSound");
+        audioDict.Add(AudioType.NetSound, netSoundAC);
+        AudioClip garbageSound = ResourceManager.Instance.Load<AudioClip>("Audio/Sound/GarbageSound");
+        audioDict.Add(AudioType.GarbageSound, garbageSound);
     }
 
     #region BGM
@@ -69,7 +84,7 @@ public class AudioManger : MonoSingleton<AudioManger>
     {
         if (!audioDict.ContainsKey(audioType))
         {
-            Debug.LogWarning("播放BGM失败！要播放的BGM不存在");
+            LogUtility.LogWarning("播放BGM失败！要播放的BGM不存在");
             return;
         }
         
@@ -112,7 +127,7 @@ public class AudioManger : MonoSingleton<AudioManger>
     {
         if (!audioDict.ContainsKey(audioType))
         {
-            Debug.LogWarning("播放Sound失败！要播放的Sound不存在");
+            LogUtility.LogWarning("播放Sound失败！要播放的Sound不存在");
             return;
         }
 

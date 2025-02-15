@@ -33,7 +33,7 @@ public class MonoManager : Singleton<MonoManager>
     }
     public void Init()
     {
-        Debug.Log("____Init MonoManger Success____");
+        LogUtility.Log("____Init MonoManger Success____");
     }
     /// <summary>
     /// 添加FixedUpdate的事件。

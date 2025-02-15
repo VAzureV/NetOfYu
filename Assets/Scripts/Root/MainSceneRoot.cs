@@ -11,6 +11,7 @@ public class MainSceneRoot : MonoBehaviour
 {
     private void Awake()
     {
+        AudioManger.Instance.PlayBGM(AudioType.Bgm1);
         UIManger.Instance.DestroyAll();
         UIManger.Instance.UpdateCanvas();
         GameManger.Instance.SetFlowchartObjInScene();//获取场景中的对话Flowchart
