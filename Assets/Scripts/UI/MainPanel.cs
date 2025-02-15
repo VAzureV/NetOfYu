@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class MainPanel : BasePanel 
 {
     private const string MainPanellName = "MainPanel";
-    private const string MainPanelPath = "Prefabs/MainPanel";
+    private const string MainPanelPath = "Prefabs/Panel/MainPanel";
     public MainPanel() : base(new UIType(MainPanellName, MainPanelPath)) { }
 
     public override void OnStart()

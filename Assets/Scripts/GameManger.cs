@@ -30,7 +30,10 @@ public class GameManger : MonoSingleton<GameManger>
             InitData();
             Save();
         }
-        CurBagConfig = ResourceManager.Instance.Load<BagConfig>("BagConfig");//读取配置数据
+        CurBagConfig = ResourceManager.Instance.Load<BagConfig>("Config/BagConfig");//读取配置数据
+        // 初始一级船一级网
+        CurGameData.AddToolNum(0);
+        CurGameData.AddToolNum(3);
     }
     public void SetFlowchartObjInScene()
     {

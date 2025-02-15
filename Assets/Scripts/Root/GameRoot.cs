@@ -9,25 +9,28 @@ using UnityEngine;
 
 public class GameRoot : MonoBehaviour 
 {
+    private static bool isInit = false;
     private void Awake()
     {
-        Init();
+        //初始化
+        if (!isInit) Init();
+        //推入开始界面
+        UIManger.Instance.Push(new StartGamePanel());
+        //播放BGM
+        AudioManger.Instance.PlayBGM(AudioType.Bgm1);
     }
 
     private void Init()
     {
         //管理器初始化
-        GameManger.Instance.Init();
         MonoManager.Instance.Init();
         ResourceManager.Instance.Init();
+        GameManger.Instance.Init();
         EventManger.Instance.Init();
         AudioManger.Instance.Init();
         UIManger.Instance.Init();
-
-        //推入开始界面
-        UIManger.Instance.Push(new StartGamePanel());
-
-        //播放BGM
-        AudioManger.Instance.PlayBGM(AudioType.Bgm1);
+        FishingSpotManger.Instance.Init();
+        //标记已初始化
+        isInit = true;
     }
 }

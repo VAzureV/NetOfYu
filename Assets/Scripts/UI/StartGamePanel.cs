@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class StartGamePanel : BasePanel
 {
     private const string StartGamePanelName = "StartGamePanel";
-    private const string StartGamePanelPath = "Prefabs/StartGamePanel";
+    private const string StartGamePanelPath = "Prefabs/Panel/StartGamePanel";
 
     public StartGamePanel() : base(new UIType(StartGamePanelName, StartGamePanelPath)) {}
     public override void OnStart()
@@ -34,6 +34,9 @@ public class StartGamePanel : BasePanel
             LoadingPanel loadingPanel = new LoadingPanel();
             UIManger.Instance.Push(loadingPanel);
             LoadSceneManager.Instance.LoadSceneAsync(1, loadingPanel.UpdateLoadingBar, null, true);
+            //UIManger.Instance.DestroyAll();
+
+
         });
         // 将点击事件添加到 EventTrigger
         eventTrigger.triggers.Add(clickEntry);

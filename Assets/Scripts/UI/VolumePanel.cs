@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class VolumePanel : BasePanel 
 {
     private const string VolumePanellName = "VolumePanel";
-    private const string VolumePanelPath = "Prefabs/VolumePanel";
+    private const string VolumePanelPath = "Prefabs/Panel/VolumePanel";
     public VolumePanel() : base(new UIType(VolumePanellName, VolumePanelPath)) { }
     public override void OnStart()
     {

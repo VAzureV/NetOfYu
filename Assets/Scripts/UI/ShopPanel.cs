@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class ShopPanel : BasePanel 
 {
     private const string ShopPanelName = "ShopPanel";
-    private const string ShopPanelPath = "Prefabs/ShopPanel";
+    private const string ShopPanelPath = "Prefabs/Panel/ShopPanel";
     public ShopPanel() : base(new UIType(ShopPanelName, ShopPanelPath)) { }
 
     public override void OnStart()

@@ -17,7 +17,7 @@ public static class UIMethods
     public static GameObject FindObjectInChild(GameObject Find_Panel, string Find_Name)
     {
         //注意要加s
-        Transform[] transforms_find = Find_Panel.GetComponentsInChildren<Transform>();
+        Transform[] transforms_find = Find_Panel.GetComponentsInChildren<Transform>(true);
 
         foreach (Transform tra in transforms_find)
         {

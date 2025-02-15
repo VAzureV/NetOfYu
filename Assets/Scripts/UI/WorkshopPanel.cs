@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class WorkshopPanel : BasePanel 
 {
     private const string WorkshopPanelName = "WorkshopPanel";
-    private const string WorkshopPanelPath = "Prefabs/WorkshopPanel";
+    private const string WorkshopPanelPath = "Prefabs/Panel/WorkshopPanel";
     public WorkshopPanel() : base(new UIType(WorkshopPanelName, WorkshopPanelPath)) { }
 
     private List<Sprite> images = new List<Sprite>();   // 动态加载的图片数组

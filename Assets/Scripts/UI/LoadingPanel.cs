@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public class LoadingPanel : BasePanel 
 {
     private const string LoadingPanelName = "LoadingPanel";
-    private const string LoadingPanelPath = "Prefabs/LoadingPanel";
+    private const string LoadingPanelPath = "Prefabs/Panel/LoadingPanel";
 
     public LoadingPanel() : base(new UIType(LoadingPanelName, LoadingPanelPath)) { }
 

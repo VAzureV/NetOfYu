@@ -11,7 +11,8 @@ public class MainSceneRoot : MonoBehaviour
 {
     private void Awake()
     {
-        UIManger.Instance.Init();
+        UIManger.Instance.DestroyAll();
+        UIManger.Instance.UpdateCanvas();
         GameManger.Instance.SetFlowchartObjInScene();//获取场景中的对话Flowchart
         GameManger.Instance.CurFlowchat.SetBooleanVariable("Opening", GameManger.Instance.CurGameData.OpeningDialog);
         if (GameManger.Instance.CurGameData.OpeningDialog == false) UIManger.Instance.Push(new MainPanel());

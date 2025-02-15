@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Flowchart
   - Boat
+  - Garbage
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Tips
+  - OnSea
   - 
   - 
   - 
@@ -49,9 +50,15 @@ TagManager:
   - name: wave
     uniqueID: 3552275765
     locked: 0
+  - name: OnSea
+    uniqueID: 3621706495
+    locked: 0
   - name: Player
     uniqueID: 4073189693
     locked: 0
   - name: UI
     uniqueID: 2866707015
+    locked: 0
+  - name: Tips
+    uniqueID: 3452726553
     locked: 0
